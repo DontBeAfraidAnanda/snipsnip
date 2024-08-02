@@ -1,29 +1,26 @@
 'use client';
 
-import Cookies from 'js-cookie';
 import { Button, Flex, Layout, Space, Typography } from 'antd';
 import {
   headerStyle,
   layoutStyle,
   flexStyle,
-  contentStyle,
   logoStyle,
+  notFoundContentStyle,
 } from '@/app/ui/mainLayoutStyle';
-import FolderList from './FolderList';
 import { useRouter } from 'next/navigation';
+import NotFound from './404/404';
 
 const { Header, Content } = Layout;
 const { Title } = Typography;
 
-export default function Page() {
+function NotFoundPage() {
   const router = useRouter();
 
-  const onLogout = () => {
-    Cookies.remove('accessToken');
-    Cookies.remove('refreshToken');
-    Cookies.remove('id');
-    router.replace('/login');
+  const goBackPage = () => {
+    router.back();
   };
+
   return (
     <Flex style={flexStyle}>
       <Layout style={layoutStyle}>
@@ -35,16 +32,20 @@ export default function Page() {
               </Title>
             </Space>
             <Space>
-              <Button onClick={onLogout}>로그아웃</Button>
+              <Button type="default" onClick={goBackPage}>
+                이전 페이지
+              </Button>
             </Space>
           </Flex>
         </Header>
-        <Content style={contentStyle}>
+        <Content style={notFoundContentStyle}>
           <Flex vertical>
-            <FolderList />
+            <NotFound />
           </Flex>
         </Content>
       </Layout>
     </Flex>
   );
 }
+
+export default NotFoundPage;
