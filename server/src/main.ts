@@ -22,7 +22,7 @@ async function bootstrap() {
     .build();
 
   app.enableCors({
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:30146', 'https://snipsnip.site'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
